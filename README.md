@@ -1,11 +1,30 @@
-<div align="center">
+# Yono Bonus Link - Firebase Hosting Configuration
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+This project is configured for **Firebase Hosting (classic / static SPA hosting)** on the free tier (Spark plan, no Blaze billing required).
 
-  <h1>Built with AI Studio</h2>
+## Firebase Project Information
+- **Project ID**: `gen-lang-client-0219310736`
+- **Default Hosting URL**: `https://gen-lang-client-0219310736.web.app`
+- **Secondary Hosting URL**: `https://gen-lang-client-0219310736.firebaseapp.com`
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+## Static SPA Configuration (`firebase.json`)
+```json
+{
+  "hosting": {
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
+```
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
-
-</div>
+All SPA routes (`/`, `/about`, `/contact`, `/disclaimer`, `/telegram`, `/app/:slug`, `/admin/login`, `/admin/*`) rewrite to `/index.html`.

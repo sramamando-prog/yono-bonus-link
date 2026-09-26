@@ -1,0 +1,37 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper function: Strictly verify authorized admin email
+    function isAuthorizedAdmin() {
+      return request.auth != null && 
+             request.auth.token.email == "akashramamando@gmail.com";
+    }
+
+    // Apps collection
+    match /apps/{appId} {
+      // Anyone can read live apps; authorized admin can read all (including drafts)
+      allow read: if resource.data.status == "live" || isAuthorizedAdmin();
+      // Only authorized admin can create, update, delete
+      allow write: if isAuthorizedAdmin();
+    }
+
+    // Categories collection
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow write: if isAuthorizedAdmin();
+    }
+
+    // Settings collection
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isAuthorizedAdmin();
+    }
+
+    // Contact messages (public can create inquiries; only admin can view/manage)
+    match /messages/{messageId} {
+      allow create: if true;
+      allow read, update, delete: if isAuthorizedAdmin();
+    }
+  }
+}

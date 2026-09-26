@@ -1,0 +1,6 @@
+{
+  "name": "Yono Bonus Link",
+  "description": "Latest bonus, reward, and earning app directory with official links, offers, and verified information.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
